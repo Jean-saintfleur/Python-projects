@@ -1,4 +1,4 @@
-# madlibs program
+# madlib program
 
 # Taking input from user 
 
