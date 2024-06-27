@@ -1,37 +1,35 @@
-import random
+import random 
 
-def guess(x):
-    random_number = random.randint(1, x)
-    guess = 0
-    while guess != random_number:
-        guess = int(input(f'Guess a number between 1 and {x}: '))
-        if guess < random_number:
-            print('Sorry, guess again. Too low.')
-        elif guess > random_number:
-            print('Sorry, guess again. Too high.')
+top_of_range = input("Pick a number: ")
 
-    print(f'Congrats. You have guessed the number {random_number} correctly!!')
+if top_of_range.isdigit():
+    top_of_range = int(top_of_range)
 
-def computer_guess(x):
-    low = 1
-    high = x
+    if top_of_range <= 0:
+        print("Please type a number larger than zero next time.")
+        quit()
+else:
+    print("Please type a number next time.")
+    quit()
+random_number = random.randint(0, top_of_range)
+user_guess_count = 0
 
-    feedback = ''
-    while feedback != "c":
+while True:
+    user_guess_count += 1
+    user_guess = input("Make a guess: ")
+    if user_guess.isdigit():
+        user_guess = int(user_guess)
 
-        if low != high:
-            guess = random.randint(low, high)
+    else:
+       print("Please type a number next time.")
+       continue
 
-        else:
-            guess = low
-        feedback = input(f"Is {guess} too high (H), too low (L), or correct (C?)").lower()
+    if user_guess == random_number:
+        print("You guessed the correct the number!")
+        break
+    elif user_guess > random_number:
+        print("Your guess was too high!")
+    else:
+        print("Your guess was too low!")
 
-        # checking to see if feedback is too high
-        if feedback == 'h':
-            high = guess -1
-        # checking to see if feedback is too low
-        elif feedback == 'l':
-            low = guess + 1
-     
-    print(f"The computer guess your number {guess}, corrrectly!")
-computer_guess(10)
+print(f"You got it in {user_guess_count}, guesses.")
